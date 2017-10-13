@@ -18,6 +18,7 @@ module Apartment
         database = @processor.call(request)
 
         if database && Apartment.connection_config[:database] != database
+          Apartment::Tenant.reset
           Apartment::Tenant.switch!(database)
         end
 
